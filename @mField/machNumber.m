@@ -8,9 +8,20 @@ function obj = machNumber(obj)
     mx = obj.mx;
     my = obj.my;
     mz = obj.mz;
+    if isempty(obj.Aex) || isempty(obj.Ms)
+        out = input('Please specify [Aex(J/m) Ms(A/m)]:\n');
+        Aex = out(1);
+        Ms = out(2);
+        obj.Aex = Aex;
+        obj.Ms = Ms;
+    end
     Ms = obj.Ms;
     Aex = obj.Aex;
     mu0 = obj.mu0;
+    if isempty(obj.cellSize)
+        cS = input('Please specify cell size [X(m) Y(m) Z(m)]:\n');
+        obj.cellSize = cS;
+    end
     cellSize = obj.cellSize;
 %%
     lex=sqrt(2*Aex/(mu0*Ms^2));

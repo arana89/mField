@@ -142,7 +142,7 @@ classdef mField < handle
                 obj.nDim = size(obj.mx);
             end
         end
-        function obj = loadOVF(obj,fname) %load from ovf file
+        function obj = loadOVF(obj,fname,varargin) %load cubic geometry from ovf file
             fileID = fopen(fname, 'r');
             while 1
                 tline = fgetl(fileID);
@@ -155,9 +155,12 @@ classdef mField < handle
             firstline = str2num(tline);
             m = cat(1,firstline,m);
             fclose(fileID);
-            nn = nthroot(length(m),3);
-            ndim = [nn nn nn];
-
+            if nargin > 2
+                ndim = varargin{1};
+            else
+                nn = nthroot(length(m),3);
+                ndim = [nn nn nn];
+            end
             obj.mx = reshape(m(:,1),ndim);
             obj.my = reshape(m(:,2),ndim);
             obj.mz = reshape(m(:,3),ndim);

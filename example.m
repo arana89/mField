@@ -10,6 +10,9 @@ obj.loadOVF('./testData/hopfion_n25_r004_H1_z0.ovf');
 %%
 obj.showPlot = 1; %boolean to plot Hopfion
 obj.hopfNumber();
+%% plot B field streamlines
+nSeed = 50; %optional input parameter
+obj.streamB(nSeed)
 %% print computed Hopf number
 obj.tHopfion
 %% assign physical quantities and compute mach number
