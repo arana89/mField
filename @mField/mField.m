@@ -26,6 +26,7 @@ classdef mField < handle
         tHopfion
         tVortex
         tMach
+        tMach2
         
         % boolean flags
         showPlot = 0;

@@ -61,8 +61,11 @@ function obj = machNumber(obj)
 % Compute Mach numbers
         U = sqrt(Ux{I}.^2 + Uy{I}.^2 + Uz{I}.^2);
         tMach{I} = U.*sqrt((1+3*N.^2)./(1-N.^2));
+        U2{I}(:,:,:) = sqrt(Ux.^2 + Uy.^2 + Uz.^2); %per-spin basis
+        tMach2{I} = U.*sqrt((1+3*N.^2)./(1-N.^2));
     end
     obj.tMach = tMach;
+    obj.tMach2 = tMach2;
     if nargout == 0
         clear obj
     end
