@@ -185,7 +185,7 @@ classdef mField < handle
             if nargin > 1
                 Nseed = varargin{1};
             else
-                Nseed = round(0.005 * prod(obj.nDim));
+                Nseed = round(0.005 * prod(n));
             end
             
             xstart = n(1)*rand(Nseed,1);
