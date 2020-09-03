@@ -26,7 +26,7 @@ classdef mField < handle
         tHopfion
         tVortex
         tMach
-        tMach2
+        tFluidVel
         
         % boolean flags
         showPlot = 0;
@@ -54,6 +54,9 @@ classdef mField < handle
             obj.my = myb;
             obj.mz = mzb;
             obj.isNormalized = 1;
+            if nargout == 0
+                clear obj
+            end
         end
         
         function obj = computeB(obj)
