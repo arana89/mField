@@ -1,5 +1,5 @@
 function obj = machNumber(obj)
-%from Ezio's code ExtractFluid.m
+%contributed by Ezio Iacocca
 %% load properties from mField class
     if ~obj.isNormalized
         obj = normalize(obj);
