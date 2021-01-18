@@ -24,7 +24,7 @@ classdef mField < handle
         % topological metrics
         tHedgehog
         tHopfion
-        tVortex
+        tVortexDensity
         tMach
         tFluidVel
         
@@ -111,20 +111,32 @@ classdef mField < handle
             if ~obj.isNormalized
                 obj.normalize;
             end
-            nn = obj.nDim(1);
-            n_center = round((nn+1)/2);
-            rvec1 = ((1:nn) - n_center) ./ (n_center-1);
-            nn2 = round(interpFac*nn);
-            n_center2 = round((nn2 + 1)/2);
-            rvec2 = ((1:nn2) - n_center2) ./ (n_center2-1);
             
-            [x1,y1,z1] = meshgrid(rvec1);
-            [x2,y2,z2] = meshgrid(rvec2);
+%             nn = obj.nDim(1);
+%             n_center = round((nn+1)/2);
+%             rvec1 = ((1:nn) - n_center) ./ (n_center-1);
+%             nn2 = round(interpFac*nn);
+%             n_center2 = round((nn2 + 1)/2);
+%             rvec2 = ((1:nn2) - n_center2) ./ (n_center2-1);
+%             
+%             [x1,y1,z1] = meshgrid(rvec1);
+%             [x2,y2,z2] = meshgrid(rvec2);
+%             
+%             mx_i = interp3(x1,y1,z1,obj.mx,x2,y2,z2,'linear',0);
+%             my_i = interp3(x1,y1,z1,obj.my,x2,y2,z2,'linear',0);
+%             mz_i = interp3(x1,y1,z1,obj.mz,x2,y2,z2,'linear',0);
+            [xx,yy,zz] = meshgrid(1:obj.nDim(1),1:obj.nDim(2),1:obj.nDim(3));
             
-            mx_i = interp3(x1,y1,z1,obj.mx,x2,y2,z2,'linear',0);
-            my_i = interp3(x1,y1,z1,obj.my,x2,y2,z2,'linear',0);
-            mz_i = interp3(x1,y1,z1,obj.mz,x2,y2,z2,'linear',0);
-
+            xr = linspace(1,obj.nDim(1), obj.nDim(1) * interpFac);
+            yr = linspace(1,obj.nDim(2), obj.nDim(2) * interpFac);
+            zr = linspace(1,obj.nDim(3), obj.nDim(3) * interpFac);
+            
+            [xci, yci, zci] = meshgrid(xr,yr,zr);
+            
+            mx_i = interp3(xx,yy,zz,obj.mx,xci,yci,zci);
+            my_i = interp3(xx,yy,zz,obj.my,xci,yci,zci);
+            mz_i = interp3(xx,yy,zz,obj.mz,xci,yci,zci);
+            
             obj.mx = mx_i;
             obj.my = my_i;
             obj.mz = mz_i;
@@ -132,7 +144,7 @@ classdef mField < handle
 %             obj.isNormalized = 0;
             obj.tHedgehog = [];
             obj.tHopfion = [];
-            obj.tVortex = [];
+            obj.tVortexDensity = [];
             if nargout == 0
                 clear obj
             end
