@@ -21,4 +21,17 @@ obj.Aex = 10e-12;
 obj.cellSize = 5e-9 * [1 1 1];
 
 obj.machNumber(); %assigned to obj.tMach
-
+%% hedgehog
+clear obj
+n = 16; %array size
+[xx,yy,zz] = meshgrid(linspace(-1,1,n));
+[mx,my,mz] = hedgehog(n);
+obj = mField(mx,my,mz);
+obj.hedgehogDensity();
+tH = obj.tHedgehog;
+figure;
+hold on;
+quiver3(xx,yy,zz,mx,my,mz); 
+isosurface(xx,yy,zz,tH,'facecolor','green');
+hold off;
+axis image;
